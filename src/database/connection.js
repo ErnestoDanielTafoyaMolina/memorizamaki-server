@@ -1,11 +1,9 @@
-import { connect } from "mongoose";
+import mongoose from "mongoose";
 import { mongo_uri } from "../config";
 
-export async function getConnection() {
-    try {
-        await connect(mongo_uri);
-    } catch (error) {
-        console.error(error.message);
-    }
-  }
-export default getConnection;
+(async ()=>{ try {
+  const db = await mongoose.connect(mongo_uri);
+  console.log("Database is connected to", db.connection.name);
+} catch (error) {
+  console.error(error.message);
+}})();
