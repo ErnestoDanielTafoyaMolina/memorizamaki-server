@@ -16,6 +16,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    img:{
+      type:String,
+      required: true,
+    },
+    progess:{
+      type: Number,
+      required:true,
+    },
+    phoneNumber:{
+      type:Number,
+      required:true,
+      unique:true,
+    },
+    Region:{
+      type: String,
+      required:true,
+    }
   }
 );
 
