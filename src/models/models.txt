@@ -1,0 +1,29 @@
+TemaHiragana{
+
+[*]Id= int,
+Symbol = string,
+Pronunciacion = string
+Imagen = string
+}TemaKatakana{
+
+[*] Id = int,
+Symbol = string,
+Pronunciación = string
+Imagen = string
+}Tema Kanji{
+
+[*]Id = int,
+Symbol = string,
+Pronunciación = string
+Imagen = string
+}Usuario {
+
+[*] id = int,
+Username = string,
+Password = string,
+Email = string,
+Imagen = string,
+Progreso = int (aumento de 1:1 cuando se complete una lección y validar si terminó la lección)
+Telefono = int,
+Region = string,
+}

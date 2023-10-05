@@ -18,18 +18,25 @@ const userSchema = new mongoose.Schema(
     },
     img:{
       type:String,
-      required: true,
+      trim:true,
     },
     progess:{
-      type: Number,
-      required:true,
+        hiragana:{
+          type:Number,
+        },
+        katakana:{
+          type:Number,
+        },
+        kanji:{
+          type:Number,
+        }
     },
     phoneNumber:{
       type:Number,
       required:true,
       unique:true,
     },
-    Region:{
+    region:{
       type: String,
       required:true,
     }
