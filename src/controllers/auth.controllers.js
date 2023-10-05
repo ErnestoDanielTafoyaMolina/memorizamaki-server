@@ -62,8 +62,40 @@ export const handleRegister = async ( req, res ) => {
     }
 }
 export const handleLogin = async ( req, res ) => {
+    const { email, password } = req.body;
+
     try {
-        
+        const userFound = await User.findOne({ email });
+    
+        if (!userFound)
+          return res.status(400).json({
+            message: ["The email does not exist"],
+          });
+          
+          const isMatch = await bcrypt.compare(password, userFound.password);
+
+          if (!isMatch) {
+            return res.status(400).json({
+              message: ["Correo o contraseña incorrectos"],
+            });
+          };
+
+          const token = await createAccessToken({
+            id:userFound._id,
+            username:userFound.username
+          });
+
+          res.cookie("token", token, {
+            httpOnly: process.env.NODE_ENV !== "development",
+            secure: true,
+            sameSite: "none",
+          });
+      
+          res.json({
+            id: userFound._id,
+            username: userFound.username,
+            email: userFound.email,
+          });
     } catch (error) {
         console.error(error.message);
         return res.status(200).json(error);
