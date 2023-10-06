@@ -7,6 +7,11 @@ const kanaSchema = new Schema({
         unique: true,
         trim:true
     },
+    kanaType:{
+        type:String,
+        required:true,
+        trim:true,
+    },
     romaji: {
         type: String,
         required: true,
@@ -14,7 +19,7 @@ const kanaSchema = new Schema({
     },
     img: {
         type: String,
-        required: true,
+        // required: true,
         unique: true,
     },
 });
