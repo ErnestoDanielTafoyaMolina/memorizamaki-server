@@ -16,8 +16,8 @@ export const handleRegister = async ( req, res ) => {
     try {
         
         const userFound = await User.find({ email });
-        console.log(userFound)
-        if(userFound.length > 0){
+        console.log('este es el usuario: ',userFound[0])
+        if(userFound[0]){
             return res.status(400).json({
                 msg:["el email ya se ha usado"]
             });
@@ -44,11 +44,13 @@ export const handleRegister = async ( req, res ) => {
         });
 
         //cookies para sesion
-        res.cookie("token", token, {
-            httpOnly: process.env.NODE_ENV !== "development",
-            secure: true,
-            sameSite: "none",
-          });
+        res.cookie("token", token
+          // , {
+          //     httpOnly: process.env.NODE_ENV !== "development",
+          //     secure: true,
+          //     sameSite: "none",
+          //   }
+          );
 
           res.json({
             id: userSaved._id,
@@ -60,7 +62,7 @@ export const handleRegister = async ( req, res ) => {
         console.error(error.message);
         return res.status(200).json(error);
     }
-}
+};
 export const handleLogin = async ( req, res ) => {
     const { email, password } = req.body;
 
@@ -69,13 +71,13 @@ export const handleLogin = async ( req, res ) => {
     
         if (!userFound)
           return res.status(400).json({
-            message: ["The email does not exist"],
+            message: ["el email no existe"],
           });
           
           const isMatch = await bcrypt.compare(password, userFound.password);
 
           if (!isMatch) {
-            return res.status(400).json({
+            return res.status(401).json({
               message: ["Correo o contraseña incorrectos"],
             });
           };
@@ -85,20 +87,30 @@ export const handleLogin = async ( req, res ) => {
             username:userFound.username
           });
 
-          res.cookie("token", token, {
-            httpOnly: process.env.NODE_ENV !== "development",
-            secure: true,
-            sameSite: "none",
-          });
+          res.cookie("token", token
+          // , {
+          //     httpOnly: process.env.NODE_ENV !== "development",
+          //     secure: true,
+          //     sameSite: "none",
+          //   }
+          );
       
           res.json({
             id: userFound._id,
             username: userFound.username,
             email: userFound.email,
           });
+          
     } catch (error) {
         console.error(error.message);
         return res.status(200).json(error);
     }
-
-}
+};
+export const logout = async (req, res) => {
+  res.cookie("token", "", {
+    // httpOnly: true,
+    // secure: true,
+    expires: new Date(0),
+  });
+  return res.sendStatus(200);
+};

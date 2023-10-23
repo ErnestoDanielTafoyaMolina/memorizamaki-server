@@ -16,30 +16,37 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    img:{
-      type:String,
-      trim:true,
-    },
-    progess:{
-        hiragana:{
-          type:Number,
-        },
-        katakana:{
-          type:Number,
-        },
-        kanji:{
-          type:Number,
-        }
-    },
-    phoneNumber:{
-      type:Number,
-      required:true,
-      unique:true,
-    },
-    region:{
+    img: {
       type: String,
-      required:true,
-    }
+      trim: true,
+    },
+    progress: {
+      hiragana: {
+        type: Number,
+        default: 0,
+      },
+      katakana: {
+        type: Number,
+        default: 0,
+      },
+      kanji: {
+        type: Number,
+        default: 0,
+      },
+      totalProgress: {
+        type: Number,
+        default: 0,
+      },
+    },
+    phoneNumber: {
+      type: Number,
+      required: true,
+      unique: true,
+    },
+    region: {
+      type: String,
+      required: true,
+    },
   }
 );
 
