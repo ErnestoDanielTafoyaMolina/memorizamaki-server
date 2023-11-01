@@ -1,16 +1,16 @@
 import request from "supertest";
 import mongoose from "mongoose";
-import app from "../src/app"; // Asegúrate de que la ruta sea la correcta
-import User from "../src/models/users.models"; // Asegúrate de que la ruta sea la correcta
-import { mongo_uri } from "../src/config"; // Asegúrate de que la ruta sea la correcta
+import app from "../src/app.js"; // Asegúrate de que la ruta sea la correcta
+import User from "../src/models/users.models.js"; // Asegúrate de que la ruta sea la correcta
+import { mongo_uri } from "../src/config.js"; // Asegúrate de que la ruta sea la correcta
 
 beforeAll(async () => {
   await mongoose.connect(mongo_uri, { useNewUrlParser: true });
 });
 
-afterEach(async () => {
-  await User.deleteMany({});
-});
+// afterEach(async () => {
+//   await User.deleteMany({});
+// });
 
 afterAll(async () => {
   await mongoose.connection.close();
