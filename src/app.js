@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import { port } from "./config";
+import { front, port } from "./config";
 
 //importacion de rutas propias
 import authRoutes from "./routes/auth.routes";
@@ -16,7 +16,7 @@ app.set('port',port);
 app.use(morgan("dev"));
 app.use(cors({
     credentials:true,
-    origin:"http://127.0.0.1:5500"
+    origin: front
 }));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());

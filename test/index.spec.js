@@ -8,9 +8,9 @@ beforeAll(async () => {
   await mongoose.connect(mongo_uri, { useNewUrlParser: true });
 });
 
-// afterEach(async () => {
-//   await User.deleteMany({});
-// });
+afterEach(async () => {
+  await User.deleteMany({});
+});
 
 afterAll(async () => {
   await mongoose.connection.close();

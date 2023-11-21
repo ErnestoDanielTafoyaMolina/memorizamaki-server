@@ -16,16 +16,17 @@ export const handleRegister = async ( req, res ) => {
     try {
         
         const userFound = await User.find({ email });
-        console.log('este es el usuario: ',userFound[0])
+        
         if(userFound[0]){
+          console.log('este es el usuario: ',userFound);
             return res.status(400).json({
                 msg:["el email ya se ha usado"]
             });
         }
-
+        
         //encriptar contraseña
         const passwordHased = await bcrypt.hash( password, 10 );
-
+        
         //modelo de usuario con contraseña encriptada
         const newUser = new User({
             username,

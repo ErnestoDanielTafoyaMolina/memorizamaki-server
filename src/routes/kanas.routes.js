@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { handleGetHiragana, handleGetKatakana } from "../controllers/kanas.controllers";
+import { getAllHiragana, handleGetHiragana, handleGetKatakana } from "../controllers/kanas.controllers";
 import { auth } from "../middlewares/auth";
 
 const router = Router();
 
+//gets all
+router.get("/hiragana", getAllHiragana);
 
 //gets level
 router.get("/hiragana/:level",auth, handleGetHiragana)

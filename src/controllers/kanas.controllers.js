@@ -1,6 +1,23 @@
 import Hiragana from "../models/hiragana.models";
 import Katakana from "../models/katakana.models";
 
+
+export const getAllHiragana = async ( req, res ) => {
+    try {
+        const AllHiragana = await Hiragana.find();
+
+        return res.status(200).json({
+            ok:true,
+            AllHiragana 
+        })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            ok:false, 
+            msg:"Algo falló intentando obtener todo el hiragana"
+        });
+    }
+}
 export const handleGetHiragana = async ( req, res ) => {
 
     const { level } =req.params;
