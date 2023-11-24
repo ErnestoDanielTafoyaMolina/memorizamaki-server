@@ -53,11 +53,8 @@ export const handleRegister = async ( req, res ) => {
           //   }
           );
 
-          res.json({
-            id: userSaved._id,
-            username: userSaved.username,
-            email: userSaved.email,
-            password:userSaved.password
+          return res.json({
+            token:token
           });
      } catch (error) {
         console.error(error.message);
@@ -96,10 +93,8 @@ export const handleLogin = async ( req, res ) => {
           //   }
           );
       
-          res.json({
-            id: userFound._id,
-            username: userFound.username,
-            email: userFound.email,
+          return res.json({
+            token:token
           });
           
     } catch (error) {
@@ -113,5 +108,7 @@ export const logout = async (req, res) => {
     // secure: true,
     expires: new Date(0),
   });
-  return res.sendStatus(200);
+  return res.status(200).json({
+    token:"",
+  });
 };
