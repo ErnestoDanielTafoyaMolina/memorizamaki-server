@@ -5,8 +5,16 @@ import { secret } from "../config";
 
 export const handleProfile = async ( req, res ) => {
     try {
-      const { token } = req.cookies;
-      if (!token) return res.send(false);
+      const { authorization } = req.headers;
+
+      if(!authorization){
+        return res.status(401).json({
+          ok: false,
+          msg:"Unauthorized Request"
+        });
+      }
+    
+      const  token  = authorization.split(' ')[1]
     
       jwt.verify(token, secret, async (error, user) => {
         if (error) return res.sendStatus(401);
@@ -18,6 +26,9 @@ export const handleProfile = async ( req, res ) => {
           id: userFound._id,
           username: userFound.username,
           email: userFound.email,
+          img:userFound.img,
+          phone:userFound.phoneNumber,
+          region:userFound.region 
         });
       });
     } catch (error) {

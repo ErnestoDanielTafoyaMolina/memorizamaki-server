@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema(
     img: {
       type: String,
       trim: true,
+      default:'https://picsum.photos/200/300'
     },
     progress: {
       hiragana: {
